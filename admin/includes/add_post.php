@@ -6,7 +6,7 @@
 
         $post_title= $_POST['title'];
         $post_author= $_POST['author'];
-        $post_category_id= $_POST['post_category_id'];
+        $post_category_id= $_POST['post_category'];
         $post_status= $_POST['post_status'];
 
         $post_image= $_FILES['image']['name'];
@@ -26,6 +26,9 @@
       $create_post_query = mysqli_query($connection, $query);        
 
       confirmQuery($create_post_query);
+           $the_post_id =mysqli_insert_id($connection);
+        echo "<h4 class='alert alert-success'>Post is created. <a href='../post.php?p_id={$the_post_id}'>View post</a></h4>";
+
   }
 
    
@@ -40,10 +43,24 @@
         <label for="title">Post Title</label>
         <input type="text" class="form-control" name="title">
     </div>
-
+        <div class="form-group">
+        <label for="title">Post Category</label>
     <div class="form-group">
-        <label for="title">Post category</label>
-        <input type="text" class="form-control" name="post_category_id">
+        <select name="post_category" id="post_category">
+        <?php 
+        $query = "SELECT * FROM categories";
+        $select_categories = mysqli_query($connection,$query); //smjestam kategorije u bazu podataka
+
+        confirmQuery($select_categories);
+
+        while($row = mysqli_fetch_assoc($select_categories)){
+        $cat_id = $row['cat_id'];
+        $cat_title = $row['cat_title'];
+        
+        echo "<option value='{$cat_id}'>{$cat_title}</option>";
+        }
+        ?>
+        </select>
     </div>
 
     <div class="form-group">
@@ -53,7 +70,11 @@
 
     <div class="form-group">
         <label for="title">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+        <br>
+        <select name="post_status" id="">
+            <option value="published">Publish</option>
+            <option value="drafted">Draft</option>
+        </select>
     </div>
 
     <div class="form-group">
@@ -67,9 +88,8 @@
     </div>
 
       <div class="form-group">
-         <label for="post_content">Post Content</label>
-         <textarea class="form-control "name="post_content" id="" cols="30" rows="10">
-         </textarea>
+         <label for="summernote">Post Content</label>
+         <textarea class="form-control "name="post_content" id="summernote" cols="30" rows="10"></textarea>
       </div>
 
   <div class="form-group">
@@ -77,3 +97,7 @@
     </div>
 
 </form>
+
+<script>
+
+</script>

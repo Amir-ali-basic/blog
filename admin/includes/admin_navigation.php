@@ -19,15 +19,15 @@
         <li><a href="../index.php">BLOG</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-              ><i class="fa fa-user"></i> John Smith <b class="caret"></b
+              ><i class="fa fa-user"></i> <?php echo $_SESSION['firstname'] ;?> <?php echo $_SESSION['lastname'] ;?><b class="caret"></b
             ></a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
               </li>
             </ul>
           </li>
@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             <li>
-              <a href="index.html"
+              <a href="index.php"
                 ><i class="fa fa-fw fa-dashboard"></i> Dashboard</a
               >
             </li>
@@ -75,12 +75,12 @@
               </ul>
             </li>
             <li>
-              <a href="blank-page.html"
+              <a href="./comments.php"
                 ><i class="fa fa-fw fa-file"></i> Comments</a
               >
             </li>
             <li>
-              <a href="index-rtl.html"
+              <a href="profile.php"
                 ><i class="fa fa-fw fa-dashboard"></i> Profile</a
               >
             <li>
@@ -90,10 +90,10 @@
               ></a>
               <ul id="users_dropdown" class="collapse">
                 <li>
-                  <a href="#">View all users</a>
+                  <a href="users.php">View all users</a>
                 </li>
                 <li>
-                  <a href="#">Add user</a>
+                  <a href="users.php?source=add_user">Add user</a>
                 </li>
               </ul>
             </li>
