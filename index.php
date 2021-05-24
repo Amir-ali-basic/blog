@@ -93,16 +93,18 @@
 
         <?php
         //Prikupljam sve podatke iz baze post
-        $query = 'SELECT * FROM posts ORDER BY post_id DESC';
+        $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC ";
 
          $select_all_posts_query = mysqli_query($connection,$query);
          //kroz vaj petlju uzimam podatke iz svih redov a i stavljam ih u promjenljivu 
          while($row = mysqli_fetch_assoc($select_all_posts_query)){
+           $post_id = $row['post_id'];
+
            $post_title = $row['post_title'];
            $post_author = $row['post_author'];
            $post_date = $row['post_date'];
            $post_image = $row['post_image'];
-           $post_content = $row['post_content'];
+           $post_content = substr($row['post_content'],0,150);
         ?>
 
 
@@ -110,14 +112,15 @@
           <article class="blog-post">
             <h2 class="blog-post-title"><?php echo $post_title; ?></h2>
             <p class="blog-post-meta">
-              <?php echo $post_date; ?> <a href="#"><?php echo $post_author; ?></a>
+              <?php echo $post_date; ?> <a href="author_post.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>" ><?php echo $post_author; ?></a>
             </p>
+            <a href="post.php?p_id= <?php echo $post_id ?>">
             <img src="images/<?php echo $post_image;?>" class="img-fluid" alt="...">
-
+          </a>
              <p>
               <?php echo $post_content; ?>
             </p>
-              <button type="button" class="btn btn-outline-primary">Read more ></button>
+              <a href="post.php?p_id= <?php echo $post_id ?>" type="button" class="btn btn-outline-primary">Read more ></a>
 
             <hr />
 
