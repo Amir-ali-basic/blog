@@ -1,5 +1,10 @@
         
         <!-- Side bar about -->
+               <?php 
+
+      ?>
+
+
         <div class="col-md-4">
          <?php include "widget.php"; ?>
           <div class="p-4 mb-3 bg-light rounded">
@@ -19,7 +24,53 @@
             </div>
             </form>
           </div>
+          <!--Login -->
+                    <?php
+                   
 
+           
+
+          ?>
+          <?php
+                $query = "SELECT * FROM users";
+      $select_users = mysqli_query($connection,$query); 
+      while($row = mysqli_fetch_assoc($select_users)){
+      $user_id = $row['user_id'];
+      $username = $row['username'];
+      $user_password = $row['user_password'];
+      $user_firstname = $row['user_firstname'];
+      $user_lastname = $row['user_lastname'];
+      $user_email = $row['user_email'];
+      $user_image = $row['user_image'];
+      $user_role = $row['user_role'];
+      }
+                    if(isset($_SESSION['user_role'])){
+            $user = $_SESSION['user_role'];
+             if($user == 'admin' || $user=='subscriber'){
+          ?>
+          
+          <div class="wall p-4 bg-light">
+          <h4>You are loggedin, <br> welcome <?php echo $username ?></h4>
+          </div>
+          <?php }}?>
+          
+          <div class="wall p-4 bg-light">
+            <h4>Login</h4>
+            <form action="includes/login.php" method="post">
+          <div class="input-group pb-2">
+            <input type="text" name="username" class='form-control' placeholder="Username">
+          </div>
+            <div class="input-group">
+              <input type="password" name="password" class='form-control' placeholder="Password">
+              <br>
+          </div>
+              <span class="input-group-btn pt-2">
+                <button class="btn btn-primary mt-2" name="login" type="submit">
+                Log in
+                </button>
+              </span>
+            </form>  
+          </div>
           <!-- Sidebar categories -->
 
           <div class="p-4">
@@ -31,8 +82,9 @@
             <ol class="list-unstyled mb-0">
             <?php 
             while($row = mysqli_fetch_assoc($select_categories_sidebar)){
+            $cat_id = $row['cat_id'];
             $cat_title = $row['cat_title'];
-            echo "<li><a href='#'>{$cat_title}</a></li>";
+            echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
            }
             ?>
               

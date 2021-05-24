@@ -1,13 +1,28 @@
  
+        <?php session_start();?>
+ 
  <div class="container">
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="link-secondary" href="#">Subscribe</a>
+            <a class="link-secondary" href="./index.php">Subscribe</a>
           </div>
-          <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="admin">ADMIN</a>
-          </div>
+          <?php
+                   
+          if(isset($_SESSION['user_role'])){
+            $user = $_SESSION['user_role'];
+            if($user == 'admin'){
+             echo " <div class='col-4 text-center'><a class='blog-header-logo text-dark' href='admin'>ADMIN</a></div>";
+            }else{
+              echo"<div class='col-4 text-center'><a class='blog-header-logo text-dark' href='#'></a></div>";
+            }
+
+          }
+          ?>
+          
+
+        
+
           <div class="col-4 d-flex justify-content-end align-items-center">
             <a class="link-secondary" href="#" aria-label="Search">
               <svg
@@ -28,9 +43,11 @@
                 <path d="M21 21l-5.2-5.2" />
               </svg>
             </a>
-            <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+            <a class="btn btn-sm btn-outline-secondary" href="registration.php">Sign up</a>
           </div>
         </div>
+
+
       </header>
 
       <div class="nav-scroller py-1 mb-2">
